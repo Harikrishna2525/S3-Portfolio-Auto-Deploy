@@ -1,0 +1,44 @@
+:root{
+  --bg1:#0f172a;
+  --bg2:#07163a;
+  --accent:#60a5fa;
+  --muted:#94a3b8;
+  --card:#0b1220;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial}
+body{background:linear-gradient(180deg,var(--bg1),var(--bg2));color:#e6eef8;-webkit-font-smoothing:antialiased}
+.wrap{max-width:980px;margin:0 auto;padding:32px}
+.hero{display:flex;align-items:center;gap:32px;padding:48px;border-radius:12px;overflow:hidden;position:relative}
+.hero-content{flex:1;animation:fadeInUp .9s ease both}
+.name{font-size:40px;margin:0 0 6px;color:white}
+.title{margin:0 0 12px;font-weight:600;color:var(--accent)}
+.tagline{margin:0 0 8px;color:var(--muted);line-height:1.45}
+.goal{margin:0 0 16px;color:#c6d6ea}
+.cta-row{display:flex;gap:12px}
+.btn{background:linear-gradient(90deg,var(--accent),#3b82f6);color:#01203a;padding:10px 14px;border-radius:8px;text-decoration:none;font-weight:600}
+.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:#dbeafe}
+
+.hero-visual{width:240px;height:160px;position:relative}
+.cloud-layers{position:absolute;inset:0}
+.layer{position:absolute;border-radius:40px;background:rgba(255,255,255,0.06);filter:blur(10px);}
+.layer.l1{width:220px;height:80px;left:10px;top:30px;animation:float 6s ease-in-out infinite}
+.layer.l2{width:180px;height:60px;left:30px;top:10px;background:rgba(255,255,255,0.04);animation:float 8s ease-in-out 1s infinite}
+.layer.l3{width:120px;height:50px;left:70px;top:50px;background:rgba(255,255,255,0.03);animation:float 10s ease-in-out 2s infinite}
+
+.panel{background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);padding:28px;margin-top:28px;border-radius:10px}
+.panel h2{margin:0 0 8px}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.skill-card{background:rgba(255,255,255,0.02);padding:14px;border-radius:8px;border:1px solid rgba(255,255,255,0.02)}
+.skill-card h3{margin:0 0 8px;color:var(--accent)}
+.skill-card ul{margin:0;padding-left:18px;color:var(--muted)}
+.footer{text-align:center;margin:28px 0;color:var(--muted)}
+
+@keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-10px)}100%{transform:translateY(0)}}
+@keyframes fadeInUp{0%{opacity:0;transform:translateY(8px)}100%{opacity:1;transform:none}}
+
+/* Responsive */
+@media (max-width:720px){
+  .hero{flex-direction:column;align-items:flex-start;padding:28px}
+  .hero-visual{width:100%;height:100px}
+}
