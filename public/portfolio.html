@@ -364,6 +364,7 @@
     .orbit-1 { width: 105px; height: 105px; margin: -52.5px; animation: spin 6s linear infinite; }
     .orbit-2 { width: 158px; height: 158px; margin: -79px; animation: spin 12s linear infinite reverse; border-style: dashed; }
     .orbit-3 { width: 208px; height: 208px; margin: -104px; animation: spin 20s linear infinite; }
+    .orbit-4 { width: 195px; height: 195px; margin: -97.5px; animation: spin 15s linear infinite reverse; border-style: dotted; }
 
     @keyframes spin { to { transform: rotate(360deg); } }
 
@@ -378,20 +379,9 @@
     }
     .dot-orb.purple { background: var(--accent2); box-shadow: 0 0 10px var(--accent2); }
     .dot-orb.green  { background: var(--accent3); box-shadow: 0 0 10px var(--accent3); }
+    .dot-orb.pink   { background: #f472b6; box-shadow: 0 0 10px #f472b6; }
 
     @keyframes dotPulse { 0%,100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.4); opacity: 0.8; } }
-
-    /* ── FLOATING LABELS around orbit ── */
-    .orbit-label {
-      position: absolute;
-      font-family: 'Space Mono', monospace;
-      font-size: 9px;
-      letter-spacing: 1.5px;
-      color: rgba(56,189,248,0.55);
-      white-space: nowrap;
-      pointer-events: none;
-      animation: fadeSlideIn 0.6s ease forwards;
-    }
 
     /* ── PANELS ── */
     .panel {
@@ -446,7 +436,7 @@
       letter-spacing: 4px;
       text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 20px;
+      margin-bottom: 8px;
       display: flex;
       align-items: center;
       gap: 10px;
@@ -457,9 +447,89 @@
       height: 1px;
       background: linear-gradient(90deg, rgba(56,189,248,0.2), transparent);
     }
+    .panel .panel-sub {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 22px;
+    }
 
     .panel p { color: var(--muted); line-height: 1.75; font-size: 15px; }
     .panel p + p { margin-top: 12px; }
+
+    /* ── CORE STACK (highlighted primaries) ── */
+    .core-stack-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 16px;
+      margin-top: 4px;
+    }
+
+    .core-badge {
+      position: relative;
+      padding: 22px 20px;
+      border-radius: 14px;
+      background: linear-gradient(160deg, rgba(56,189,248,0.07), rgba(129,140,248,0.03));
+      border: 1px solid rgba(56,189,248,0.22);
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(14px) scale(0.98);
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+    }
+    .core-badge::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: 14px;
+      padding: 1px;
+      background: linear-gradient(120deg, var(--accent), var(--accent2), var(--accent3), var(--accent));
+      background-size: 300% 300%;
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0.55;
+      animation: coreBorder 6s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes coreBorder { to { background-position: 300% 0; } }
+
+    .core-badge:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 34px rgba(56,189,248,0.16);
+    }
+
+    .core-badge .core-rank {
+      position: absolute;
+      top: 12px; right: 14px;
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 2px;
+      color: rgba(56,189,248,0.4);
+    }
+
+    .core-icon {
+      font-size: 22px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px; height: 42px;
+      border-radius: 10px;
+      background: rgba(56,189,248,0.1);
+      margin-bottom: 14px;
+    }
+
+    .core-badge h3 {
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      letter-spacing: 1px;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .core-badge p {
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
 
     /* ── SKILLS GRID ── */
     .skills-grid {
@@ -544,6 +614,13 @@
     .skill-card:hover ul li { color: #b0cedf; padding-left: 20px; }
     .skill-card:hover ul li::before { transform: translateX(3px); }
 
+    /* mark a primary/flagship item inside a normal skill card */
+    .skill-card ul li.flagship {
+      color: #cfe8fb;
+      font-weight: 600;
+    }
+    .skill-card ul li.flagship::before { content: '★'; font-size: 9px; top: 6px; color: var(--accent3); }
+
     /* ── STAT ROW ── */
     .stat-row {
       display: flex;
@@ -551,6 +628,7 @@
       margin-top: 24px;
       padding-top: 20px;
       border-top: 1px solid rgba(56,189,248,0.06);
+      flex-wrap: wrap;
     }
     .stat { display: flex; flex-direction: column; gap: 4px; }
     .stat-num {
@@ -658,10 +736,12 @@
       .hero-visual { width: 100%; }
       .orbit-wrap { width: 170px; height: 170px; }
       .orbit-3 { width: 168px; height: 168px; margin: -84px; }
+      .orbit-4 { width: 156px; height: 156px; margin: -78px; }
       .panel { padding: 24px 22px; }
       body { cursor: auto; }
       #cursor, #cursor-ring { display: none; }
       .stat-row { gap: 20px; }
+      .core-stack-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
     }
   </style>
 </head>
@@ -690,11 +770,11 @@
         </div>
         <h1 class="name"><span>Hari Krish</span></h1>
         <p class="title">AWS DevOps Engineer</p>
-        <p class="tagline">I design and build reliable AWS infrastructure with a focus on DevOps practices, CI/CD pipelines, infrastructure as code, automation, and observability.</p>
+        <p class="tagline">I design and build reliable AWS infrastructure with a focus on DevOps practices, CI/CD pipelines, infrastructure as code, container orchestration, and observability.</p>
         <p class="goal">My goal is to build systems that are scalable, fault-tolerant, and production-ready — bridging development and operations through automation and cloud-native tooling.</p>
         <div class="cta-row">
           <a class="btn btn-primary" href="#summary">About Me</a>
-          <a class="btn btn-ghost" href="#skills">View Skills</a>
+          <a class="btn btn-ghost" href="#core-stack">Core Stack</a>
         </div>
       </div>
 
@@ -702,8 +782,9 @@
         <div class="orbit-wrap">
           <div class="orbit-core"></div>
           <div class="orbit orbit-1"><div class="dot-orb" data-tip="AWS"></div></div>
-          <div class="orbit orbit-2"><div class="dot-orb purple" data-tip="K8s"></div></div>
+          <div class="orbit orbit-2"><div class="dot-orb purple" data-tip="Terraform"></div></div>
           <div class="orbit orbit-3"><div class="dot-orb green" data-tip="CI/CD"></div></div>
+          <div class="orbit orbit-4"><div class="dot-orb pink" data-tip="K8s"></div></div>
         </div>
       </div>
     </header>
@@ -719,8 +800,8 @@
           <span class="stat-label">AWS Services</span>
         </div>
         <div class="stat">
-          <span class="stat-num" data-count="5">0</span>
-          <span class="stat-label">Core Skills</span>
+          <span class="stat-num" data-count="4">0</span>
+          <span class="stat-label">Core Stack</span>
         </div>
         <div class="stat">
           <span class="stat-num" data-count="100">0</span>
@@ -729,34 +810,68 @@
       </div>
     </section>
 
+    <!-- CORE STACK — the 4 highlighted primaries -->
+    <section id="core-stack" class="panel" data-label="02 / CORE STACK">
+      <h2>// Core Stack</h2>
+      <p class="panel-sub">The four tools this work runs on day to day.</p>
+      <div class="core-stack-grid">
+        <div class="core-badge">
+          <span class="core-rank">01</span>
+          <span class="core-icon">☁️</span>
+          <h3>AWS</h3>
+          <p>EC2, ALB/ASG, S3, CloudFront, VPC, IAM, CloudWatch — the backbone every stack sits on.</p>
+        </div>
+        <div class="core-badge">
+          <span class="core-rank">02</span>
+          <span class="core-icon">🧱</span>
+          <h3>Terraform</h3>
+          <p>Infrastructure as code for repeatable, version-controlled environments.</p>
+        </div>
+        <div class="core-badge">
+          <span class="core-rank">03</span>
+          <span class="core-icon">⛴️</span>
+          <h3>Kubernetes</h3>
+          <p>Container orchestration — deployments, scaling, and service networking.</p>
+        </div>
+        <div class="core-badge">
+          <span class="core-rank">04</span>
+          <span class="core-icon">⚙️</span>
+          <h3>GitHub Actions</h3>
+          <p>CI/CD pipelines that build, test, and ship on every push.</p>
+        </div>
+      </div>
+    </section>
+
     <!-- SKILLS -->
-    <section id="skills" class="panel" data-label="02 / SKILLS">
+    <section id="skills" class="panel" data-label="03 / SKILLS">
       <h2>// Skills</h2>
+      <p class="panel-sub">Full toolset, starred items mark daily drivers.</p>
       <div class="skills-grid">
         <div class="skill-card">
           <h3><span class="skill-icon">☁️</span> Cloud</h3>
-          <ul><li>Amazon Web Services</li><li>EC2, S3, IAM, VPC</li><li>DynamoDB, Lambda</li><li>API Gateway</li></ul>
+          <ul><li class="flagship">Amazon Web Services</li><li>EC2, S3, IAM, VPC</li><li>CloudFront, CloudTrail</li><li>DynamoDB, Lambda</li><li>API Gateway</li></ul>
         </div>
         <div class="skill-card">
           <h3><span class="skill-icon">🏗️</span> Infrastructure</h3>
-          <ul><li>Infrastructure as Code</li><li>Terraform</li><li>CloudFormation</li></ul>
+          <ul><li>Infrastructure as Code</li><li class="flagship">Terraform</li></ul>
         </div>
         <div class="skill-card">
-          <h3><span class="skill-icon">🐳</span> Containers</h3>
-          <ul><li>Docker</li><li>Container workflows</li></ul>
+          <h3><span class="skill-icon">🐳</span> Containers &amp; Orchestration</h3>
+          <ul><li>Docker</li><li class="flagship">Kubernetes</li><li>Container workflows</li></ul>
         </div>
         <div class="skill-card">
           <h3><span class="skill-icon">⚙️</span> CI/CD</h3>
-          <ul><li>GitHub Actions</li><li>Automated pipelines</li></ul>
+          <ul><li class="flagship">GitHub Actions</li><li>Automated pipelines</li></ul>
         </div>
         <div class="skill-card">
           <h3><span class="skill-icon">📡</span> Monitoring</h3>
           <ul><li>CloudWatch</li><li>Observability</li></ul>
         </div>
         <div class="skill-card">
-          <h3><span class="skill-icon">🛠️</span> Other</h3>
+          <h3><span class="skill-icon">🛠️</span> Operations</h3>
           <ul>
             <li>Linux</li>
+            <li>Git</li>
             <li>Networking fundamentals</li>
             <li>System debugging</li>
             <li>Reliability engineering</li>
@@ -865,7 +980,7 @@
     panels.forEach(p => panelObserver.observe(p));
 
     /* ── TYPED TEXT ── */
-    const fullText = "I am an AWS DevOps engineer focused on cloud infrastructure and distributed systems. My work revolves around designing AWS environments, automating infrastructure using Infrastructure as Code, building CI/CD pipelines, and ensuring systems remain observable and reliable in production.";
+    const fullText = "I am an AWS DevOps engineer focused on cloud infrastructure and distributed systems. My work revolves around designing AWS environments, automating infrastructure with Terraform, orchestrating containers with Kubernetes, and building CI/CD pipelines with GitHub Actions.";
     const el = document.getElementById('typed-text');
     const cursorEl = document.createElement('span');
     cursorEl.className = 'cursor';
@@ -904,13 +1019,45 @@
         if (e.isIntersecting) {
           e.target.querySelectorAll('[data-count]').forEach(el => {
             const v = +el.dataset.count;
-            const suffix = el.textContent.includes('%') ? '%' : (v === 100 ? '%' : '');
             animateCount(el, v, v === 100 ? '%' : '+');
           });
           obs.unobserve(e.target);
         }
       });
     }, { threshold: 0.4 }).observe(document.getElementById('summary'));
+
+    /* ── CORE STACK STAGGER + TILT ── */
+    (function () {
+      const coreBadges = document.querySelectorAll('.core-badge');
+      new IntersectionObserver((entries, obs) => {
+        entries.forEach(en => {
+          if (en.isIntersecting) {
+            coreBadges.forEach((c, i) => {
+              c.style.animation = `cardIn 600ms cubic-bezier(.2,.9,.2,1) ${i * 100 + 80}ms both`;
+            });
+            obs.unobserve(en.target);
+          }
+        });
+      }, { threshold: 0.1 }).observe(document.getElementById('core-stack'));
+
+      coreBadges.forEach(c => {
+        let rect = null;
+        c.addEventListener('pointermove', e => {
+          rect = rect || c.getBoundingClientRect();
+          const dx = e.clientX - (rect.left + rect.width / 2);
+          const dy = e.clientY - (rect.top + rect.height / 2);
+          const rotX = (-dy / (rect.height / 2)) * 6;
+          const rotY = (dx / (rect.width / 2)) * 6;
+          c.style.transform = `translateY(-4px) rotateX(${rotX}deg) rotateY(${rotY}deg) scale(1.02)`;
+          c.style.transition = 'transform 200ms cubic-bezier(.2,.9,.2,1)';
+        });
+        c.addEventListener('pointerleave', () => {
+          c.style.transform = '';
+          c.style.transition = 'transform 500ms cubic-bezier(.2,.9,.2,1), border-color 0.3s, box-shadow 0.3s';
+          rect = null;
+        });
+      });
+    })();
 
     /* ── SKILLS STAGGER + TILT + PROGRESS ── */
     (function () {
