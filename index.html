@@ -921,6 +921,19 @@
       letter-spacing: 0.08em; text-transform: uppercase; color: var(--dim);
     }
 
+    .stack-reveal-wide { grid-column: 1 / -1; }
+    .stack-card-wide {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 26px;
+      padding: 26px 28px;
+    }
+    .stack-card-wide .stack-top { margin-bottom: 0; gap: 14px; align-items: center; }
+    .stack-card-wide .stack-wide-copy h3 { margin-bottom: 6px; }
+    .stack-card-wide .stack-wide-copy > p { color: var(--muted); font-size: 12.5px; line-height: 1.7; max-width: 560px; }
+    .stack-card-wide .stack-tags { margin-top: 0; padding-top: 0; justify-content: flex-end; max-width: 320px; }
+
     /* ─────────────────────────────────────────────
        SKILLS
     ───────────────────────────────────────────── */
@@ -1170,6 +1183,7 @@
     @media (max-width: 1120px) {
       .stack-grid { grid-template-columns: repeat(2, 1fr); }
       .stack-card { min-height: 250px; }
+      .stack-card-wide { min-height: 0; }
     }
     @media (max-width: 1000px) {
       .skills-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1211,6 +1225,8 @@
       .section-index { width: fit-content; }
       .section-note { max-width: 460px; }
       .about-grid { grid-template-columns: 1fr; }
+      .stack-card-wide { grid-template-columns: auto minmax(0, 1fr); }
+      .stack-card-wide .stack-tags { grid-column: 1 / -1; justify-content: flex-start; max-width: none; padding-top: 4px; }
       .id-card { max-width: none; }
       .process { grid-template-columns: repeat(2, 1fr); gap: 38px 24px; padding-top: 0; }
       .process-track { display: none; }
@@ -1234,6 +1250,7 @@
       .about-copy { padding: 28px 24px; }
       .id-card { padding: 26px 24px; }
       .stack-card { padding: 24px 21px 21px; }
+      .stack-card-wide { padding: 24px 21px; }
       .skill-card { padding: 23px 21px; }
       .stat-row { gap: 12px; }
       .stat + .stat { padding-left: 14px; }
@@ -1541,7 +1558,7 @@
             <p class="eyebrow">Core Stack</p>
             <h2>The tools behind the <span class="grad">uptime</span>.</h2>
           </div>
-          <p class="section-note">Four tools this work runs on, day to day — from first plan to production alarms.</p>
+          <p class="section-note">Five tools this work runs on, day to day — from first plan to production alarms.</p>
         </div>
 
         <div class="stack-grid">
@@ -1598,6 +1615,22 @@
               <h3>GitHub Actions</h3>
               <p>CI/CD pipelines that build, test, and ship on every push — no manual handoffs.</p>
               <div class="stack-tags"><span>CI</span><span>CD</span><span>OIDC</span><span>Automation</span></div>
+            </article>
+          </div>
+
+          <div class="stack-reveal stack-reveal-wide" data-reveal style="--delay: 0.26s">
+            <article class="stack-card stack-card-wide surface tilt" data-tilt style="--tint: #4ce0ff">
+              <div class="stack-top">
+                <span class="stack-icon">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="m7 9 3 3-3 3M13 15h4"/></svg>
+                </span>
+                <span class="stack-num">05</span>
+              </div>
+              <div class="stack-wide-copy">
+                <h3>OpenCode — AI-Assisted DevOps</h3>
+                <p>Terminal-based agents that read the repo, plan the change, run real commands, and show diffs — review-first automation for infrastructure work.</p>
+              </div>
+              <div class="stack-tags"><span>AI Agents</span><span>Terminal</span><span>Diff Review</span><span>Open Source</span></div>
             </article>
           </div>
         </div>
